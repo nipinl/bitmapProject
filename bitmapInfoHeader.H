@@ -3,7 +3,8 @@
 #include<cstdint>
 using namespace std;
 #pragma pack(2)
-struct bitmapInfoHeader{
+namespace advCppCourse{
+    struct bitmapInfoHeader{
     char header[2]{'B','M'};
     int32_t headerSize{40};
     int32_t width;
@@ -16,7 +17,7 @@ struct bitmapInfoHeader{
     int32_t verticalResolution{2400};
     int32_t colors{0};
     int32_t importantColors{0};
-
-};
+    };
+}
 
 #endif//info header
