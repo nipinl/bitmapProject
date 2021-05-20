@@ -31,6 +31,7 @@
         "tuple": "cpp",
         "utility": "cpp",
         "variant": "cpp",
-        "044_iteratableClass.C": "cpp"
+        "044_iteratableClass.C": "cpp",
+        "fractal.C": "cpp"
     }
 }
