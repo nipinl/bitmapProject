@@ -33,6 +33,7 @@
         "variant": "cpp",
         "044_iteratableClass.C": "cpp",
         "fractal.C": "cpp",
-        "bitmap.C": "cpp"
+        "bitmap.C": "cpp",
+        "mandelbrot.C": "cpp"
     }
 }
