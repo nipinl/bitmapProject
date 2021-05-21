@@ -11,8 +11,8 @@ using namespace std;
 using namespace advCppCourse;
 
 int main(){
-    const int W = 800;
-    const int H = 600;
+    const int W = 1200;
+    const int H = 900;
     bitmap bitmap1(W,H);
     bitmap1.setPixel(W/2, H/2, 255,255,255);
 
