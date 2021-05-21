@@ -41,11 +41,16 @@ int main(){
         for(int y=0;y<H;y++){
             int iter = iterPerPixel[y*W+x];
             uint8_t color = (uint8_t)(256*(double) iter/Mandelbrot::MAX_ITER);
-            color = color*color*color;//max will be 255 since uint_8 has a max 255
+            double hue = 0.0;
+            for (int i = 0; i <= iter; i++)
+            {
+                hue += ((double)histogram[i] )/histSum; 
+            }
+            uint8_t red = 0;
+            uint8_t green = hue*255;
+            uint8_t blue = 0;
 
-            bitmap1.setPixel(x,y,0,color,0);
-            if (color<min) min=color;
-            if (color>max) max=color;
+            bitmap1.setPixel(x,y,red,green,blue);
         }
     }
     
