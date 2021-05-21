@@ -2,20 +2,56 @@
 using namespace std;
 namespace advCppCourse{
     fractalCreator::fractalCreator(int width, int height)
+    :
+    m_width(width),m_height(height),
+    m_histogram(new int[Mandelbrot::MAX_ITER+1]{0}),
+    m_iterPerPixel(new int[m_width*m_height]{0}),
+    m_bitmap(m_width,m_height),
+    m_zoomList(m_width,m_height),
+    m_histSum(0)
     {
+        m_zoomList.add(zoom(m_width/2,m_height/2,4.0/m_width));
     }
 
     fractalCreator::~fractalCreator(){}
     void fractalCreator::calculateIteration(){
-
+        for(int x=0;x<m_width;x++){
+            for(int y=0;y<m_height;y++){
+                pair<double,double> coords = m_zoomList.doZoom(x,y);
+                int iter = Mandelbrot::getIterations(coords.first,coords.second);
+                m_iterPerPixel[y*m_width+x] = iter;//storing the iterations
+                if(iter!=Mandelbrot::MAX_ITER) m_histogram[iter]++;//to avoid the last entry showing no. of pixels going to inf 
+            }
+        }
+    }
+    void fractalCreator::calculateTotalIterations(){
+    for (int i=0;i<Mandelbrot::MAX_ITER;i++){m_histSum+=m_histogram[i];}
     }
     void fractalCreator::drawFractal(){
+    
+    for(int x=0;x<m_width;x++){
+        for(int y=0;y<m_height;y++){
+            uint8_t red = 0;
+            uint8_t green = 0;
+            uint8_t blue = 0;
+            int iter = m_iterPerPixel[y*m_width+x];
+            if(iter!=Mandelbrot::MAX_ITER){
+                double hue = 0.0;
+                for (int i = 0; i <= iter; i++)
+                {
+                    hue += ((double)m_histogram[i] )/m_histSum; 
+                }
+                green = pow(255,hue);
+            } 
 
+            m_bitmap.setPixel(x,y,red,green,blue);
+        }
+    }
     }
     void fractalCreator::addZoom(const zoom& z){
-
+        m_zoomList.add(z);
     }
-    void fractalCreator::writeBitmap(string& name){
-        
+    void fractalCreator::writeBitmap(string name){
+        m_bitmap.write(name);
     }
 }

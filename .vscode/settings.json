@@ -36,6 +36,7 @@
         "bitmap.C": "cpp",
         "mandelbrot.C": "cpp",
         "zoomList.C": "cpp",
-        "fractalCreator.C": "cpp"
+        "fractalCreator.C": "cpp",
+        "random": "cpp"
     }
 }

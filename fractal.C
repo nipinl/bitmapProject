@@ -1,8 +1,5 @@
 //name : fractal.C
 #include<iostream>
-#include<cstdint>
-#include<memory>
-#include<math.h>
 #include<iostream>
 #include"bitmap.H"
 #include"Mandelbrot.H"
@@ -14,52 +11,13 @@ using namespace std;
 using namespace advCppCourse;
 
 int main(){
-    const int W = 800;
-    const int H = 600;
-    bitmap bitmap1(W,H);
-    bitmap1.setPixel(W/2, H/2, 255,255,255);
-
-    double min{1e5}, max{-1e5};
-    zoomList zList(W,H);
-    zList.add(zoom(W/2,H/2,4.0/W) );
-    zList.add(zoom(295,H-202,0.1) );
-    zList.add(zoom(312,H-304,0.1) );
-
-
-    unique_ptr<int[]>histogram(new int[Mandelbrot::MAX_ITER+1]{0});//with initialisation to 0
-    unique_ptr<int[]>iterPerPixel(new int[W*H]{0});//with initialisation to 0
-    for(int x=0;x<W;x++){
-        for(int y=0;y<H;y++){
-            pair<double,double> coords = zList.doZoom(x,y);
-            int iter = Mandelbrot::getIterations(coords.first,coords.second);
-            iterPerPixel[y*W+x] = iter;//storing the iterations
-            if(iter!=Mandelbrot::MAX_ITER) histogram[iter]++;//to avoid the last entry showing no. of pixels going to inf 
-        }
-    }
-    //totalling histogram
-    int histSum=0;
-    for (int i=0;i<Mandelbrot::MAX_ITER;i++){histSum+=histogram[i];}
-    cout<<"histogram total is : "<<histSum<<endl;
-    for(int x=0;x<W;x++){
-        for(int y=0;y<H;y++){
-            uint8_t red = 0;
-            uint8_t green = 0;
-            uint8_t blue = 0;
-            int iter = iterPerPixel[y*W+x];
-            if(iter!=Mandelbrot::MAX_ITER){
-                double hue = 0.0;
-                for (int i = 0; i <= iter; i++)
-                {
-                    hue += ((double)histogram[i] )/histSum; 
-                }
-                green = pow(255,hue);
-                //cout<<"green = "<<green<<"Hue = "<<hue<<endl;
-            } 
-
-            bitmap1.setPixel(x,y,red,green,blue);
-        }
-    }
-    
-    bitmap1.write("test.bmp");
+    int height=600;
+    fractalCreator fractalCreator(800,600);
+    fractalCreator.addZoom(zoom(295,height-202,0.1) );
+    fractalCreator.addZoom(zoom(312,height-304,0.1) );
+    fractalCreator.calculateIteration();
+    fractalCreator.calculateTotalIterations();
+    fractalCreator.drawFractal();    
+    fractalCreator.writeBitmap("test1.bmp");
     cout<<"finished"<<endl; 
 }
