@@ -5,6 +5,7 @@
 #include<math.h>
 #include"bitmap.H"
 #include"Mandelbrot.H"
+#include"zoom.H"
 
 
 using namespace std;
