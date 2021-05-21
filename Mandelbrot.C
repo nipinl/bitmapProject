@@ -5,7 +5,7 @@ namespace advCppCourse{
     
     Mandelbrot::Mandelbrot(){}
     Mandelbrot::~Mandelbrot(){}
-    int getIterations(double x, double y){
+    int Mandelbrot::getIterations(double x, double y){
 
         complex<double> z =0;
         complex<double> c(x,y);
@@ -15,11 +15,12 @@ namespace advCppCourse{
             if(abs(z)>2){//if z exeed 2, it will go to infinity with iterations
                 break;
             }
+            iter++;
         }
 
 
 
-        return 0;
+        return iter;
 
     }
     

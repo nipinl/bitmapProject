@@ -1,6 +1,8 @@
 //name : fractal.C
 #include<iostream>
+#include<cstdint>
 #include"bitmap.H"
+#include"Mandelbrot.H"
 
 
 using namespace std;
@@ -18,13 +20,17 @@ int main(){
             //bitmap1.setPixel(i,j,120,200,100);//fav green color
             double xFractal = (x - W/2)*(2.0/W);
             double yFractal = (y - H/2)*(2.0/H);
-            if (xFractal<min) min=xFractal;
-            if (xFractal>max) max=xFractal;
-            if (yFractal<min) min=yFractal;
-            if (yFractal>max) max=yFractal;
+
+            int iter = Mandelbrot::getIterations(xFractal,yFractal);
+            uint8_t red = (uint8_t)(256*(double) iter/Mandelbrot::MAX_ITER);
+            bitmap1.setPixel(x,y,red,red,red);
+            if (red<min) min=red;
+            if (red>max) max=red;
+            /* if (red<min) min=red;
+            if (yFractal>max) max=yFractal; */
         }
     }
     cout<<min<<","<<max<<endl;
     bitmap1.write("test.bmp");
-    cout<<"finished"<<endl;
+    cout<<"finished"<<endl; 
 }
