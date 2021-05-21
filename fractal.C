@@ -7,6 +7,7 @@
 #include"bitmap.H"
 #include"Mandelbrot.H"
 #include"zoomList.H"
+#include"fractalCreator.H"
 
 
 using namespace std;
