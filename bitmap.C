@@ -1,3 +1,4 @@
+#include<fstream>
 #include"bitmap.H"
 #include"bitmapFileHeader.H"
 #include"bitmapInfoHeader.H"
@@ -19,7 +20,17 @@ namespace advCppCourse{
         infoHeader.width = m_width;
         infoHeader.height = m_height;
 
-        return false;
+        ofstream file;
+        file.open(fileName,ios::out|ios::binary);
+        if(!file){
+            return false;
+        }
+        file.write((char *)&fileHeader, sizeof(fileHeader));
+        file.write((char *)&infoHeader, sizeof(infoHeader));
+        file.write((char *)m_pPixels.get(), m_width*m_height*3);
+
+        file.close();
+        return true;
         }
     bitmap::~bitmap(){}
     
