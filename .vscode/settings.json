@@ -34,6 +34,7 @@
         "044_iteratableClass.C": "cpp",
         "fractal.C": "cpp",
         "bitmap.C": "cpp",
-        "mandelbrot.C": "cpp"
+        "mandelbrot.C": "cpp",
+        "zoomList.C": "cpp"
     }
 }

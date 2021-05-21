@@ -1,13 +1,19 @@
 #ifndef ZOOMLIST_H_
 #define ZOOMLIST_H_
+#include<vector>
+#include<utility>
+#include "zoom.H"
 namespace advCppCourse{
-struct zoomList
-{
-    int x{0};
-    int y{0};
-    double scale{0.0};
-    zoom(int x, int y, double scale):x(x),y(y),scale(scale){}
-};
-
+    class zoomList
+    {
+        private:
+            int m_width{0};
+            int m_height{0};
+            std::vector<zoom> zooms;
+        public:
+            zoomList(int width, int height);
+            void add(const zoom& z);
+            std::pair<double, double>doZoom(int x, int y);
+    };
 }
 #endif//zoomList

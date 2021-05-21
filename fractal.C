@@ -5,15 +5,15 @@
 #include<math.h>
 #include"bitmap.H"
 #include"Mandelbrot.H"
-#include"zoom.H"
+#include"zoomList.H"
 
 
 using namespace std;
 using namespace advCppCourse;
 
 int main(){
-    const int W = 1200;
-    const int H = 900;
+    const int W = 800;
+    const int H = 600;
     bitmap bitmap1(W,H);
     bitmap1.setPixel(W/2, H/2, 255,255,255);
 
