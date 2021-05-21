@@ -2,6 +2,7 @@
 #include<iostream>
 #include<cstdint>
 #include<memory>
+#include<math.h>
 #include"bitmap.H"
 #include"Mandelbrot.H"
 
@@ -27,10 +28,7 @@ int main(){
 
             int iter = Mandelbrot::getIterations(xFractal,yFractal);
             iterPerPixel[y*W+x] = iter;//storing the iterations
-            if(iter!=Mandelbrot::MAX_ITER) histogram[iter]++;//to avoid the last entry showing no. of pixels going to inf
-
-            
-            
+            if(iter!=Mandelbrot::MAX_ITER) histogram[iter]++;//to avoid the last entry showing no. of pixels going to inf 
         }
     }
     //totalling histogram
@@ -39,16 +37,19 @@ int main(){
     cout<<"histogram total is : "<<histSum<<endl;
     for(int x=0;x<W;x++){
         for(int y=0;y<H;y++){
-            int iter = iterPerPixel[y*W+x];
-            uint8_t color = (uint8_t)(256*(double) iter/Mandelbrot::MAX_ITER);
-            double hue = 0.0;
-            for (int i = 0; i <= iter; i++)
-            {
-                hue += ((double)histogram[i] )/histSum; 
-            }
             uint8_t red = 0;
-            uint8_t green = hue*255;
+            uint8_t green = 0;
             uint8_t blue = 0;
+            int iter = iterPerPixel[y*W+x];
+            if(iter!=Mandelbrot::MAX_ITER){
+                double hue = 0.0;
+                for (int i = 0; i <= iter; i++)
+                {
+                    hue += ((double)histogram[i] )/histSum; 
+                }
+                green = pow(255,hue);
+                //cout<<"green = "<<green<<"Hue = "<<hue<<endl;
+            } 
 
             bitmap1.setPixel(x,y,red,green,blue);
         }
