@@ -13,7 +13,7 @@ int main(){
     bitmap1.setPixel(W/2, H/2, 255,255,255);
     for(int i=0;i<W;i++){
         for(int j=0;j<H;j++){
-            bitmap1.setPixel(i,j,122,200,100);
+            bitmap1.setPixel(i,j,120,200,100);
         }
     }
     bitmap1.write("test.bmp");
