@@ -5,7 +5,7 @@ using namespace std;
 #pragma pack(2)
 namespace advCppCourse{
     struct bitmapInfoHeader{
-    char header[2]{'B','M'};
+    //char header[2]{'B','M'};
     int32_t headerSize{40};
     int32_t width;
     int32_t height;
@@ -19,5 +19,4 @@ namespace advCppCourse{
     int32_t importantColors{0};
     };
 }
-
 #endif//info header
