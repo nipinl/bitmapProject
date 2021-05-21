@@ -30,14 +30,22 @@ int main(){
             if(iter!=Mandelbrot::MAX_ITER) histogram[iter]++;//to avoid the last entry showing no. of pixels going to inf
 
             
+            
+        }
+    }
+    //totalling histogram
+    int histSum=0;
+    for (int i=0;i<Mandelbrot::MAX_ITER;i++){histSum+=histogram[i];}
+    cout<<"histogram total is : "<<histSum<<endl;
+    for(int x=0;x<W;x++){
+        for(int y=0;y<H;y++){
+            int iter = iterPerPixel[y*W+x];
             uint8_t color = (uint8_t)(256*(double) iter/Mandelbrot::MAX_ITER);
             color = color*color*color;//max will be 255 since uint_8 has a max 255
 
             bitmap1.setPixel(x,y,0,color,0);
             if (color<min) min=color;
             if (color>max) max=color;
-            /* if (color<min) min=color;
-            if (yFractal>max) max=yFractal; */
         }
     }
     
