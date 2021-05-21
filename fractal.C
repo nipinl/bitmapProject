@@ -3,6 +3,7 @@
 #include<cstdint>
 #include<memory>
 #include<math.h>
+#include<iostream>
 #include"bitmap.H"
 #include"Mandelbrot.H"
 #include"zoomList.H"
@@ -18,16 +19,18 @@ int main(){
     bitmap1.setPixel(W/2, H/2, 255,255,255);
 
     double min{1e5}, max{-1e5};
+    zoomList zList(W,H);
+    zList.add(zoom(W/2,H/2,4.0/W) );
+    zList.add(zoom(295,H-202,0.1) );
+    zList.add(zoom(312,H-304,0.1) );
+
+
     unique_ptr<int[]>histogram(new int[Mandelbrot::MAX_ITER+1]{0});//with initialisation to 0
     unique_ptr<int[]>iterPerPixel(new int[W*H]{0});//with initialisation to 0
     for(int x=0;x<W;x++){
         for(int y=0;y<H;y++){
-            //bitmap1.setPixel(i,j,120,200,100);//fav green color
-            double xFractal = (x - W/2-W/4)*(2.0/H);
-            double yFractal = (y - H/2)*(2.0/H);
-
-
-            int iter = Mandelbrot::getIterations(xFractal,yFractal);
+            pair<double,double> coords = zList.doZoom(x,y);
+            int iter = Mandelbrot::getIterations(coords.first,coords.second);
             iterPerPixel[y*W+x] = iter;//storing the iterations
             if(iter!=Mandelbrot::MAX_ITER) histogram[iter]++;//to avoid the last entry showing no. of pixels going to inf 
         }

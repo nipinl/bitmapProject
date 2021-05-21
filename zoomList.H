@@ -3,17 +3,22 @@
 #include<vector>
 #include<utility>
 #include "zoom.H"
+using namespace std;
 namespace advCppCourse{
     class zoomList
     {
         private:
+            double m_xCenter{0};
+            double m_yCenter{0};
+            double m_scale{1.0};
+
             int m_width{0};
             int m_height{0};
-            std::vector<zoom> zooms;
+            vector<zoom> zooms;
         public:
             zoomList(int width, int height);
             void add(const zoom& z);
-            std::pair<double, double>doZoom(int x, int y);
+            pair<double, double>doZoom(int x, int y);
     };
 }
 #endif//zoomList
