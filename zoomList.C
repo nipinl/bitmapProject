@@ -3,9 +3,7 @@
 using namespace std;
 namespace advCppCourse{
 
-    zoomList::zoomList(int width, int height):m_width(width),m_height(height){
-
-    }
+    zoomList::zoomList(int width, int height):m_width(width),m_height(height){}
     void zoomList::add(const zoom& z){
         zooms.push_back(z);
         m_xCenter += (z.x - m_width/2)*m_scale;

@@ -6,7 +6,6 @@
 #include"zoomList.H"
 #include"fractalCreator.H"
 
-
 using namespace std;
 using namespace advCppCourse;
 

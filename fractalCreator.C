@@ -20,7 +20,7 @@ namespace advCppCourse{
                 pair<double,double> coords = m_zoomList.doZoom(x,y);
                 int iter = Mandelbrot::getIterations(coords.first,coords.second);
                 m_iterPerPixel[y*m_width+x] = iter;//storing the iterations
-                if(iter!=Mandelbrot::MAX_ITER) m_histogram[iter]++;//to avoid the last entry showing no. of pixels going to inf 
+                if(iter!=Mandelbrot::MAX_ITER) m_histogram[iter]++;
             }
         }
     }
