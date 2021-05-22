@@ -18,6 +18,7 @@ int main(){
     fractalCreator.addRange(0.5,RGB(255,255,0));
     fractalCreator.addRange(1.0,RGB(255,255,255));
 
+    cout<<"index for 400 is "<<fractalCreator.getIntRange(400)<<endl;
     fractalCreator.addZoom(zoom(295,202,0.1) );
     fractalCreator.addZoom(zoom(312,304,0.1) );
         

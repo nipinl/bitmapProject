@@ -32,6 +32,8 @@ private:
     void calculateRangeTotals();
     void drawFractal();
     void writeBitmap(string name);
+    int getIntRange(int iter) const;
+
 public:
     fractalCreator(int width, int height);
     ~fractalCreator();

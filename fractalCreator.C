@@ -1,4 +1,5 @@
 #include<iostream>
+#include<assert.h>
 #include"fractalCreator.H"
 using namespace std;
 namespace advCppCourse{
@@ -66,12 +67,24 @@ namespace advCppCourse{
 
                 m_rangeTotals[rangeIndex] += pixels; 
             }
-        
-        for (int value : m_rangeTotals){
-            cout << "Range total :" << value << endl;
         }
+    int fractalCreator::getIntRange(int iter) const{
+        int range = 0;
+        for (int i = 1; i < m_ranges.size(); i++)
+        {
+            range = i;
+            if (m_ranges[i]>iter){
+                break;
+            }
+        }
+        range--;
+        assert(range>-1);
+        assert(range<m_ranges.size());
+        return range;
     }
-    void fractalCreator::drawFractal(){
+
+    void fractalCreator::drawFractal()
+    {
         RGB startColor(0,0,0);
         RGB endColor(0,0,255);
         RGB colorDiff = startColor - endColor;
@@ -97,7 +110,7 @@ namespace advCppCourse{
                 
             }
         }
-        }
+    }
     void fractalCreator::writeBitmap(string name){
         m_bitmap.write(name);
     }
