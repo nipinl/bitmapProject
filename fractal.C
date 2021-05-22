@@ -21,7 +21,7 @@ int main(){
     fractalCreator.addZoom(zoom(295,202,0.1) );
     fractalCreator.addZoom(zoom(312,304,0.1) );
         
-    fractalCreator.run("test2.bmp");
+    fractalCreator.run("image.bmp");
 
-    cout<<"finished"<<endl; 
+    cout<<"Program finished"<<endl; 
 }
