@@ -91,19 +91,30 @@ namespace advCppCourse{
     
         for(int x=0;x<m_width;x++){
             for(int y=0;y<m_height;y++){
+
+                int iter = m_iterPerPixel[y*m_width+x];
+                int range = getIntRange(iter);
+                int rangeTotal = m_rangeTotals[range];
+                int rangeStart = m_ranges[range];
+
+                RGB& startColor = m_colors[range];
+                RGB& endColor = m_colors[range+1];
+                RGB colorDiff = endColor - startColor;
+
                 uint8_t red = 0;
                 uint8_t green = 0;
                 uint8_t blue = 0;
-                int iter = m_iterPerPixel[y*m_width+x];
+
+
                 if(iter!=Mandelbrot::MAX_ITER){
-                    double hue = 0.0;
-                    for (int i = 0; i <= iter; i++)
+                    int totalPixels = 0;
+                    for (int i = rangeStart; i <= iter; i++)
                     {
-                        hue += ((double)m_histogram[i] )/m_histSum; 
+                        totalPixels += m_histogram[i]; 
                     }
-                    red = startColor.r + colorDiff.r * hue;
-                    green = startColor.g + colorDiff.g * hue;
-                    blue = startColor.b + colorDiff.b * hue;
+                    red = startColor.r + colorDiff.r * (double)totalPixels/rangeTotal;
+                    green = startColor.g + colorDiff.g * (double)totalPixels/rangeTotal;
+                    blue = startColor.b + colorDiff.b * (double)totalPixels/rangeTotal;
                 } 
 
                 m_bitmap.setPixel(x,y,red,green,blue);
