@@ -13,7 +13,7 @@ using namespace advCppCourse;
 
 int main(){
     fractalCreator fractalCreator(800,600);
-
+    fractalCreator.addRange(0.0,RGB(0,0,0));
     fractalCreator.addRange(0.3,RGB(255,0,0));
     fractalCreator.addRange(0.5,RGB(255,255,0));
     fractalCreator.addRange(1.0,RGB(255,255,255));

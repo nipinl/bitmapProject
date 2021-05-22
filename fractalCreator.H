@@ -24,10 +24,12 @@ private:
     int m_histSum;
     vector <int> m_ranges;
     vector <RGB> m_colors;
-    vector<int> rangeTotals;
+    vector<int> m_rangeTotals;
+    bool m_gotFirstRange{false};
     //member functions
     void calculateIteration();
     void calculateTotalIterations();
+    void calculateRangeTotals();
     void drawFractal();
     void writeBitmap(string name);
 public:

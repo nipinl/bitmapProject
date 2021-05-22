@@ -1,3 +1,4 @@
+#include<iostream>
 #include"fractalCreator.H"
 using namespace std;
 namespace advCppCourse{
@@ -5,6 +6,7 @@ namespace advCppCourse{
     void fractalCreator::run(string name){
         calculateIteration();
         calculateTotalIterations();
+        calculateRangeTotals();
         drawFractal();    
         writeBitmap(name);
     }
@@ -12,6 +14,11 @@ namespace advCppCourse{
     void fractalCreator::addRange(double rangeEnd, const RGB& rgb){
         m_ranges.push_back(rangeEnd*Mandelbrot::MAX_ITER);
         m_colors.push_back(rgb);
+        if (m_gotFirstRange){
+            m_rangeTotals.push_back(0);
+        }
+        m_gotFirstRange = true;
+        
     }
     //public method addZoom
     void fractalCreator::addZoom(const zoom& z){
@@ -46,6 +53,24 @@ namespace advCppCourse{
     void fractalCreator::calculateTotalIterations(){
     for (int i=0;i<Mandelbrot::MAX_ITER;i++){m_histSum+=m_histogram[i];}
     }
+    void fractalCreator::calculateRangeTotals(){
+        
+            int rangeIndex = 0;
+            for (int i = 0; i < Mandelbrot::MAX_ITER; i++)
+            {
+                int pixels = m_histogram[i];
+                if (i>=m_ranges[rangeIndex+1]){
+                    rangeIndex++;
+                }
+                
+
+                m_rangeTotals[rangeIndex] += pixels; 
+            }
+        
+        for (int value : m_rangeTotals){
+            cout << "Range total :" << value << endl;
+        }
+    }
     void fractalCreator::drawFractal(){
         RGB startColor(0,0,0);
         RGB endColor(0,0,255);
@@ -76,5 +101,6 @@ namespace advCppCourse{
     void fractalCreator::writeBitmap(string name){
         m_bitmap.write(name);
     }
+
 
 }
