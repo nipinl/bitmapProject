@@ -8,6 +8,7 @@
 #include"zoom.H"
 #include"bitmap.H"
 #include"zoomList.H"
+#include"RGB.H"
 using namespace std;
 namespace advCppCourse{
 class fractalCreator
@@ -20,16 +21,16 @@ private:
     bitmap m_bitmap;
     zoomList m_zoomList;
     int m_histSum;
-
-
-public:
-    fractalCreator(int width, int height);
-    ~fractalCreator();
+    //member functions
     void calculateIteration();
     void calculateTotalIterations();
     void drawFractal();
-    void addZoom(const zoom& z);
     void writeBitmap(string name);
+public:
+    fractalCreator(int width, int height);
+    ~fractalCreator();
+    void addZoom(const zoom& z);
+    void run(string name);
 };
 
 

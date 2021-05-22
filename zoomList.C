@@ -7,7 +7,7 @@ namespace advCppCourse{
     void zoomList::add(const zoom& z){
         zooms.push_back(z);
         m_xCenter += (z.x - m_width/2)*m_scale;
-        m_yCenter += (z.y - m_height/2)*m_scale;
+        m_yCenter += -(z.y - m_height/2)*m_scale;
         m_scale *= z.scale;
         cout<<m_xCenter<<",  "<<m_yCenter<<",  "<<m_scale<<endl;
     }

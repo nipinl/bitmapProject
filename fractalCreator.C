@@ -1,6 +1,13 @@
 #include"fractalCreator.H"
 using namespace std;
 namespace advCppCourse{
+    void fractalCreator::run(string name){
+        calculateIteration();
+        calculateTotalIterations();
+        drawFractal();    
+        writeBitmap(name);
+    }
+
     fractalCreator::fractalCreator(int width, int height)
     :
     m_width(width),m_height(height),
@@ -28,26 +35,32 @@ namespace advCppCourse{
     for (int i=0;i<Mandelbrot::MAX_ITER;i++){m_histSum+=m_histogram[i];}
     }
     void fractalCreator::drawFractal(){
+        RGB startColor(0,0,0);
+        RGB endColor(0,255,0);
+        RGB colorDiff = startColor - endColor;
     
-    for(int x=0;x<m_width;x++){
-        for(int y=0;y<m_height;y++){
-            uint8_t red = 0;
-            uint8_t green = 0;
-            uint8_t blue = 0;
-            int iter = m_iterPerPixel[y*m_width+x];
-            if(iter!=Mandelbrot::MAX_ITER){
-                double hue = 0.0;
-                for (int i = 0; i <= iter; i++)
-                {
-                    hue += ((double)m_histogram[i] )/m_histSum; 
-                }
-                green = pow(255,hue);
-            } 
+        for(int x=0;x<m_width;x++){
+            for(int y=0;y<m_height;y++){
+                uint8_t red = 0;
+                uint8_t green = 0;
+                uint8_t blue = 0;
+                int iter = m_iterPerPixel[y*m_width+x];
+                if(iter!=Mandelbrot::MAX_ITER){
+                    double hue = 0.0;
+                    for (int i = 0; i <= iter; i++)
+                    {
+                        hue += ((double)m_histogram[i] )/m_histSum; 
+                    }
+                    red = startColor.r + colorDiff.r * hue;
+                    green = startColor.g + colorDiff.g * hue;
+                    blue = startColor.b + colorDiff.b * hue;
+                } 
 
-            m_bitmap.setPixel(x,y,red,green,blue);
+                m_bitmap.setPixel(x,y,red,green,blue);
+                
+            }
         }
-    }
-    }
+        }
     void fractalCreator::addZoom(const zoom& z){
         m_zoomList.add(z);
     }
