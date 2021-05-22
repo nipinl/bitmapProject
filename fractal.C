@@ -13,6 +13,11 @@ using namespace advCppCourse;
 
 int main(){
     fractalCreator fractalCreator(800,600);
+
+    fractalCreator.addRange(0.3,RGB(255,0,0));
+    fractalCreator.addRange(0.5,RGB(255,255,0));
+    fractalCreator.addRange(1.0,RGB(255,255,255));
+
     fractalCreator.addZoom(zoom(295,202,0.1) );
     fractalCreator.addZoom(zoom(312,304,0.1) );
         

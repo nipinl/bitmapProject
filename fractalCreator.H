@@ -4,6 +4,7 @@
 #include<cstdint>
 #include<memory>
 #include<math.h>
+#include<vector>
 #include"Mandelbrot.H"
 #include"zoom.H"
 #include"bitmap.H"
@@ -21,6 +22,9 @@ private:
     bitmap m_bitmap;
     zoomList m_zoomList;
     int m_histSum;
+    vector <int> m_ranges;
+    vector <RGB> m_colors;
+    vector<int> rangeTotals;
     //member functions
     void calculateIteration();
     void calculateTotalIterations();
@@ -31,6 +35,7 @@ public:
     ~fractalCreator();
     void addZoom(const zoom& z);
     void run(string name);
+    void addRange(double rangeEnd, const RGB& rgb);
 };
 
 

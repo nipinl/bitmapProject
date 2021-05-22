@@ -38,6 +38,7 @@
         "zoomList.C": "cpp",
         "fractalCreator.C": "cpp",
         "random": "cpp",
-        "RGB.C": "cpp"
+        "RGB.C": "cpp",
+        "vector": "cpp"
     }
 }

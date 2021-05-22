@@ -1,13 +1,24 @@
 #include"fractalCreator.H"
 using namespace std;
 namespace advCppCourse{
+    //public method run
     void fractalCreator::run(string name){
         calculateIteration();
         calculateTotalIterations();
         drawFractal();    
         writeBitmap(name);
     }
-
+    //public method addRange
+    void fractalCreator::addRange(double rangeEnd, const RGB& rgb){
+        m_ranges.push_back(rangeEnd*Mandelbrot::MAX_ITER);
+        m_colors.push_back(rgb);
+    }
+    //public method addZoom
+    void fractalCreator::addZoom(const zoom& z){
+        m_zoomList.add(z);
+    }
+    
+    //constructor
     fractalCreator::fractalCreator(int width, int height)
     :
     m_width(width),m_height(height),
@@ -19,8 +30,9 @@ namespace advCppCourse{
     {
         m_zoomList.add(zoom(m_width/2,m_height/2,4.0/m_width));
     }
-
+    //destructor
     fractalCreator::~fractalCreator(){}
+    //member functions definitions
     void fractalCreator::calculateIteration(){
         for(int x=0;x<m_width;x++){
             for(int y=0;y<m_height;y++){
@@ -36,7 +48,7 @@ namespace advCppCourse{
     }
     void fractalCreator::drawFractal(){
         RGB startColor(0,0,0);
-        RGB endColor(0,255,0);
+        RGB endColor(0,0,255);
         RGB colorDiff = startColor - endColor;
     
         for(int x=0;x<m_width;x++){
@@ -61,10 +73,8 @@ namespace advCppCourse{
             }
         }
         }
-    void fractalCreator::addZoom(const zoom& z){
-        m_zoomList.add(z);
-    }
     void fractalCreator::writeBitmap(string name){
         m_bitmap.write(name);
     }
+
 }
